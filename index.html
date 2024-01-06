@@ -10,7 +10,9 @@
     <script>
         document.getElementById('sendButton').addEventListener('click', function() {
             // Виконайте запит до вашого сервера
-            fetch('http://localhost:3000/send-message', {
+            console.log("2")
+            fetch('https://3b53-89-64-12-101.ngrok-free.app/send-message', {
+                
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
