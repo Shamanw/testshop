@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Web App Demo</title>
+    <title>Telegram Web App</title>
     <script src="https://core.telegram.org/js/telegram-web-app.js"></script>
-    <script src="app.js"></script>
 </head>
 <body>
-    <h1>Welcome to Telegram Web App</h1>
-    <div id="username">Loading...</div>
+    <button id="button1">Надіслати повідомлення 1</button>
+    <button id="button2">Надіслати повідомлення 2</button>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+
+        document.getElementById('button1').addEventListener('click', function() {
+            sendMessageToBot("Повідомлення 1");
+        });
+
+        document.getElementById('button2').addEventListener('click', function() {
+            sendMessageToBot("Повідомлення 2");
+        });
+
+        function sendMessageToBot(message) {
+            // Передайте дані на ваш сервер, який відправить повідомлення через бота
+            fetch('https://t.me/testikshop228top_bot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ chat_id: tg.initDataUnsafe.user.id, message: message })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch((error) => console.error('Error:', error));
+        }
+    </script>
 </body>
 </html>
