@@ -2,24 +2,26 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const token = '6740976568:AAEAd0_uA8IAbtepREm0_YhA9A9stlkUSL8';
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot('6740976568:AAEAd0_uA8IAbtepREm0_YhA9A9stlkUSL8', { polling: true });
 const app = express();
-
 app.use(bodyParser.json());
 
-app.post('/API_ENDPOINT', (req, res) => {
-    const chatId = req.body.chatId;
-    const message = req.body.message;
+app.post('/send-message', (req, res) => {
+    const queryId = req.body.queryId;
 
-    bot.sendMessage(chatId, message).then(() => {
+    bot.answerWebAppQuery(queryId, {
+        type: 'article',
+        id: 'queryResult',
+        title: 'Відповідь від бота',
+        input_message_content: {
+            message_text: 'Це повідомлення від бота.'
+        }
+    }).then(() => {
         res.sendStatus(200);
-    }).catch((error) => {
+    }).catch(error => {
+        console.error(error);
         res.status(500).send(error.toString());
     });
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Сервер запущено на порті ${port}`);
-});
+app.listen(3000, () => console.log('Сервер запущено на порті 3000'));

@@ -5,29 +5,21 @@
     <script src="https://core.telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <button id="button1">Надіслати повідомлення 1</button>
-    <button id="button2">Надіслати повідомлення 2</button>
+    <button id="sendButton">Відправити повідомлення</button>
 
     <script>
-        const tg = window.Telegram.WebApp;
-
-        document.getElementById('button1').addEventListener('click', function() {
-            sendMessageToServer("Повідомлення 1");
-        });
-
-        document.getElementById('button2').addEventListener('click', function() {
-            sendMessageToServer("Повідомлення 2");
-        });
-
-        function sendMessageToServer(message) {
-            fetch('/API_ENDPOINT', {
+        document.getElementById('sendButton').addEventListener('click', function() {
+            // Виконайте запит до вашого сервера
+            fetch('https://shamanw.github.io/testshop/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ chatId: tg.initDataUnsafe.user.id, message: message })
+                body: JSON.stringify({
+                    queryId: window.Telegram.WebApp.initDataUnsafe.query_id // Ідентифікатор запиту для відповіді
+                })
             });
-        }
+        });
     </script>
 </body>
 </html>
