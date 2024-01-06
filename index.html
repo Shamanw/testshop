@@ -10,7 +10,7 @@
     <script>
         document.getElementById('sendButton').addEventListener('click', function() {
             // Виконайте запит до вашого сервера
-            fetch('https://shamanw.github.io/testshop/', {
+            fetch('http://localhost:3000/send-message', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
