@@ -22,7 +22,7 @@ app.post('/send-message', (req, res) => {
     }).then(() => {
         res.sendStatus(200);
     }).catch(error => {
-        console.error(error);
+        //console.error(error);
         res.status(500).send(error.toString());
     });
 });

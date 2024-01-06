@@ -20,7 +20,10 @@
                 body: JSON.stringify({
                     queryId: window.Telegram.WebApp.initDataUnsafe.query_id // Ідентифікатор запиту для відповіді
                 })
+                
             });
+            console.log(window.Telegram.WebApp.initDataUnsafe.query_id)
+            console.log("3")
         });
     </script>
 </body>
