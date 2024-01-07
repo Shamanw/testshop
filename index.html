@@ -6,24 +6,17 @@
 </head>
 <body>
     <button id="sendButton">Відправити повідомлення</button>
-
     <script>
         document.getElementById('sendButton').addEventListener('click', function() {
             // Виконайте запит до вашого сервера
-            console.log("2")
-            fetch('https://3b53-89-64-12-101.ngrok-free.app/send-message', {
-                
+            fetch('https://8bd8-89-64-12-101.ngrok-free.app/send-message', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    queryId: window.Telegram.WebApp.initDataUnsafe.query_id // Ідентифікатор запиту для відповіді
-                })
-                
+                body: JSON.stringify({ chatId: chatId})                
             });
             console.log(window.Telegram.WebApp.initDataUnsafe.query_id)
-            console.log("3")
         });
     </script>
 </body>
